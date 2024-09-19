@@ -1,0 +1,195 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligns items at the start */
+    min-height: 100vh; /* Ensures the body takes at least the full height of the viewport */
+    margin: 0; /* Removes default margin */
+    background-color: #f4f4f4; /* Light background color */
+}
+
+.container {
+    width: 90%; /* Use more width for better spacing */
+    max-width: 800px; /* Increases max width for larger screens */
+    padding: 20px; /* Adds padding */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    background-color: white; /* White background for the container */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px; /* Consistent margin */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+h1, h3 {
+    text-align: center; /* Center text in headings */
+}
+
+h1 {
+    color: #0f0be6;
+    font-size: 26px; /* Adjusted font size for readability */
+}
+
+button {
+    width: 100%; /* Makes buttons full width */
+    margin-top: 10px; /* Adds space between buttons */
+    padding: 12px; /* Padding for button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded button */
+    background-color: #007bff; /* Button color */
+    color: white; /* Button text color */
+    font-size: 16px; /* Button font size */
+    cursor: pointer; /* Pointer on hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darken button on hover */
+}
+
+.candidates {
+    display: flex;
+    justify-content: center; /* Center candidates */
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Wrap candidates on smaller screens */
+}
+
+.candidate {
+    border: 2px solid #ccc;
+    padding: 10px; /* Padding for candidate */
+    background-color: #fff; /* Background for candidate */
+    border-radius: 10px; /* Rounded corners */
+    width: 30%; /* Adjusted width of candidate cards */
+    margin: 10px; /* Margin between cards */
+    text-align: center; /* Center text in candidate */
+    transition: transform 0.3s ease; /* Animation on hover */
+}
+
+.candidate img {
+    width: 100px; /* Image size */
+    height: 100px; /* Image height */
+    border-radius: 50%; /* Circle image */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+.candidate:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+.winning-prediction {
+    margin-top: 20px;
+    color: #ff6347; /* Color for winning prediction */
+}
+
+table {
+    margin: 20px 0; /* Adds space above and below the table */
+    width: 100%; /* Full width for better mobile viewing */
+    border-collapse: collapse; /* Collapse borders */
+    font-size: 14px; /* Font size for table */
+}
+
+th, td {
+    border: 1px solid #ccc; /* Table border */
+    padding: 12px; /* Padding for cells */
+    text-align: center; /* Center text in cells */
+}
+
+th {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text for contrast */
+}
+
+@media screen and (max-width: 768px) {
+    .candidates {
+        flex-direction: column; /* Stack candidates on smaller screens */
+        align-items: center; /* Center align items */
+    }
+
+    .candidate {
+        width: 80%; /* Full width on mobile */
+        margin: 10px 0; /* Vertical margin for spacing */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 22px; /* Font size for smaller screens */
+    }
+    
+    .candidate img {
+        width: 80px; /* Smaller image for mobile */
+        height: 80px; /* Smaller height */
+    }
+
+    table {
+        font-size: 12px; /* Reduced font size for tables */
+    }
+
+    th, td {
+        padding: 8px; /* Reduced padding for mobile */
+    }
+}
+
+.share-buttons {
+    margin-top: 20px;
+    display: flex; /* Use flex for alignment */
+    justify-content: center; /* Center the share buttons */
+}
+
+.share-buttons a {
+    display: inline-block;
+    margin: 5px 10px; /* Spacing between buttons */
+    padding: 10px 15px; /* Padding for share buttons */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* Text color */
+    text-decoration: none; /* No underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Transition for hover */
+}
+
+.share-buttons a:hover {
+    background-color: #0056b3; /* Darken button on hover */
+}
+
+.admin-password-container {
+    margin-top: 20px;
+    text-align: center; /* Center the text */
+}
+
+.admin-password-container input {
+    padding: 10px; /* Padding for input */
+    border: 1px solid #ccc; /* Border for input */
+    border-radius: 5px; /* Rounded corners */
+    margin-right: 10px; /* Space between input and button */
+}
+
+.admin-password-container button {
+    padding: 10px 15px; /* Button padding */
+    background-color: #007bff; /* Button color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.admin-password-container button:hover {
+    background-color: #0056b3; /* Darken button on hover */
+}
+
+
+.candidates {
+    position: relative; /* Make candidates a positioning context */
+}
+
+.emoji {
+    position: absolute; /* Position it absolutely */
+    font-size: 48px; /* Size of the emoji */
+    transition: transform 0.5s ease-in-out; /* Animation effect */
+    opacity: 0; /* Start hidden */
+    pointer-events: none; /* Ignore mouse events */
+}
+
+.visible {
+    opacity: 1; /* Fully visible when active */
+    transform: translateY(-20px); /* Move up slightly */
+}
+
+

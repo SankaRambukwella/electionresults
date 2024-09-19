@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Presidential Election Results 2024 </h1>
+ 
+        <div class="candidates">
+            <div class="candidate">
+                <img src="candidate1.jpg" alt="Candidate 1">
+                <h2>Anura Kumara Dissanayake</h2>
+                <div class="votes" id="votes1">0</div>
+            </div>
+            <div class="candidate">
+                <img src="candidate2.jpg" alt="Candidate 2">
+                <h2>Sajith Premadasa</h2>
+                <div class="votes" id="votes2">0</div>
+            </div>
+            <div class="candidate">
+                <img src="candidate3.jpg" alt="Candidate 3">
+                <h2>Ranil Wickramasinghe</h2>
+                <div class="votes" id="votes3">0</div>
+            </div>
+            <span class="emoji" id="topEmoji">🏆</span> <!-- Trophy emoji -->
+         </div>
+        <div class="total-votes" id="totalVotes">Total Votes: 0</div>
+        
+
+        <div class="container mt-5">
+            <h2>Districts Votes</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>District</th>
+                        <th>Anura Kumara Dissanayake</th>
+                        <th>Sajith Premadasa</th>
+                        <th>Ranil Wickramasinghe</th>
+                    </tr>
+                </thead>
+                <tbody id="districtResults">
+                    <!-- District rows will be populated here -->
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination"></ul>
+            </nav>
+        </div>
+       
+        <div class="share-buttons">
+            <a id="facebookShare" href="#" target="_blank">Share on Facebook</a>
+            <a id="whatsappShare" href="#" target="_blank">Share on WhatsApp</a>
+          
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery at the end of your body -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const districts = [
+            "Colombo", "Gampaha", "Kaluthara", "Kandy", "Matale",
+            "Nuwara Eliya", "Galle", "Matara", "Hambantota", "Jaffna",
+            "Vanni", "Batticaloa", "Digamadulla", "Trinkomalee", "Kurunegale",
+            "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Monaragala",
+            "Rathnapura", "Kegalle"
+        ];
+
+        const votesData = districts.map(district => {
+            return [
+                localStorage.getItem(`${district}_candidate1Votes`) || 0,
+                localStorage.getItem(`${district}_candidate2Votes`) || 0,
+                localStorage.getItem(`${district}_candidate3Votes`) || 0
+            ];
+        });
+
+        const rowsPerPage = 5;
+        let currentPage = 1;
+
+        function renderDistricts(page) {
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const districtTable = document.getElementById('districtResults');
+            districtTable.innerHTML = '';
+
+            const pageDistricts = districts.slice(startIndex, endIndex);
+            pageDistricts.forEach((district, index) => {
+                const row = document.createElement('tr');
+                const districtVotes = votesData[startIndex + index];
+
+                row.innerHTML = `<td>${district}</td>
+                                 <td>${districtVotes[0]}</td>
+                                 <td>${districtVotes[1]}</td>
+                                 <td>${districtVotes[2]}</td>`;
+                districtTable.appendChild(row);
+            });
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            const pageCount = Math.ceil(districts.length / rowsPerPage);
+
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement('li');
+                li.className = 'page-item';
+                li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                li.onclick = () => {
+                    currentPage = i;
+                    renderDistricts(currentPage);
+                };
+                pagination.appendChild(li);
+            }
+        }
+
+        // Initial rendering
+        renderDistricts(currentPage);
+        renderPagination();
+    </script>
+</body>
+</html>
